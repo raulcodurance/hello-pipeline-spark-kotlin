@@ -12,9 +12,9 @@ pipeline {
               sh './gradlew build'
            }
        }
-       stage('FatJar') {
+       stage('ShadowJar') {
            steps {
-              sh './gradlew fatJar'
+              sh './gradlew shadowJar'
            }
        }
        stage('Deploy') {
