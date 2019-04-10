@@ -2,6 +2,9 @@ pipeline {
    agent any
 
    stages {
+
+   // init stage install servless npm awscli
+   // config
        stage('Gradle') {
            steps {
                sh './gradlew --version'
@@ -19,7 +22,7 @@ pipeline {
        }
        stage('Deploy') {
            steps {
-              sh 'cd build/libs java -jar sparkkotlin-all-1.0-SNAPSHOT.jar'
+              sh './gradlew deploy'
            }
       }
    }
