@@ -1,10 +1,24 @@
 pipeline {
    agent any
 
+   environment {
+        AWS_ACCESS_KEY_ID = ''
+        AWS_SECRET_ACCESS_KEY = ''
+   }
+
    stages {
 
    // init stage install servless npm awscli
    // config
+
+       stage{
+           steps {
+               withNPM() {
+                   echo "Performing npm build..."
+                   sh 'npm install'
+               }
+           }
+       }
        stage('Gradle') {
            steps {
                sh './gradlew --version'
