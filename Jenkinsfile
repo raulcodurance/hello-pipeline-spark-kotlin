@@ -1,17 +1,21 @@
 pipeline {
-    agent any
+   agent any
 
-    stages {
-        stage('Gradle') {
+   stages {
+       stage('Gradle') {
+           steps {
+               sh './gradlew --version'
+           }
+       }
+       stage('FatJar') {
             steps {
-                sh './gradlew --version'
+               sh './gradlew fatJar'
             }
-        }
-
-        stage('Test') {
-                    steps {
-                        sh './gradlew test'
-                    }
-                }
-    }
+       }
+      stage('Run') {
+           steps {
+              sh 'cd build/libs java -jar sparkkotlin-all-1.0-SNAPSHOT.jar'
+           }
+      }
+   }
 }
