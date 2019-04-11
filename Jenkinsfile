@@ -1,11 +1,6 @@
 pipeline {
    agent any
 
-   environment {
-        AWS_ACCESS_KEY_ID = ''
-        AWS_SECRET_ACCESS_KEY = ''
-   }
-
    stages {
 
    // init stage install servless npm awscli
@@ -25,6 +20,13 @@ pipeline {
               sh './gradlew shadowJar'
            }
        }
+
+       stage('Config AWS Credentials'){
+           steps{
+             sh './serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY}
+           }
+       }
+
        stage('Deploy') {
            steps {
               sh './gradlew deploy'
