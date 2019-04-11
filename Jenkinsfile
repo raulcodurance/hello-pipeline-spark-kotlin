@@ -10,8 +10,6 @@ pipeline {
 
    // init stage install servless npm awscli
    // config
-
-
        stage('Gradle') {
            steps {
                sh './gradlew --version'
